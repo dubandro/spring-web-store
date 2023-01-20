@@ -58,5 +58,10 @@ class ProductsControllerTest extends SpringBootTestBase {
                 .uri("/api/v1/products/" + newProduct.getId())
                 .exchange()
                 .expectStatus().isOk();
+
+        webTestClient.get()
+                .uri("/api/v1/products/" + newProduct.getId())
+                .exchange()
+                .expectStatus().isNotFound();
     }
 }
