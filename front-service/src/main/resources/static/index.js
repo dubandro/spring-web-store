@@ -28,6 +28,9 @@
     }
 
     function run($rootScope, $http, $localStorage) {
+
+
+
         if ($localStorage.springWebUser) {
             try {
                 let jwt = $localStorage.springWebUser.token;
@@ -54,7 +57,24 @@
     }
 })();
 
-angular.module('market-front').controller('indexController', function ($rootScope, $scope, $http, $location, $localStorage) {
+angular.module('market-front', []).controller('indexController', function ($rootScope, $scope, $http, $location, $localStorage) {
+
+    $scope.getTopProducts = function (period, quantity) {
+        $http({
+            url: 'http://localhost:5555/stat/api/v1/stat/top_items',
+            method: 'GET',
+            params: {
+                period: period,
+                quantity: quantity
+            }
+        }).then(function (response){
+            console.log(response);
+            console.log("response");
+            $scope.topProducts = response.data;
+        })
+    };
+    $scope.getTopProducts(5, 10);
+
     $scope.tryToAuth = function () {
         $http.post('http://localhost:5555/auth/auth', $scope.user)
             .then(function successCallback(response) {
