@@ -9,6 +9,8 @@ import org.springframework.http.MediaType;
 import org.springframework.test.web.reactive.server.WebTestClient;
 import reactor.core.publisher.Mono;
 
+import java.math.BigDecimal;
+
 import static org.junit.jupiter.api.Assertions.*;
 
 class ProductsControllerTest extends SpringBootTestBase {
@@ -23,7 +25,7 @@ class ProductsControllerTest extends SpringBootTestBase {
         ProductDto testProduct = new ProductDto();
         testProduct.setTitle("TestProduct");
         testProduct.setCategoryTitle("TestCategory");
-        testProduct.setPrice(100);
+        testProduct.setPrice(BigDecimal.valueOf(100));
 
         Category category = new Category();
         category.setTitle("TestCategory");

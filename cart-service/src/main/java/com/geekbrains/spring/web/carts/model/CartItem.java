@@ -1,9 +1,11 @@
-package com.geekbrains.spring.web.carts.dto;
+package com.geekbrains.spring.web.carts.model;
 
 import com.geekbrains.spring.web.api.dto.ProductDto;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+
+import java.math.BigDecimal;
 
 @Data
 @NoArgsConstructor
@@ -12,8 +14,8 @@ public class CartItem {
     private Long productId;
     private String productTitle;
     private int quantity;
-    private int pricePerProduct;
-    private int price;
+    private BigDecimal pricePerProduct;
+    private BigDecimal price;
     //todo add categoryTitle
 
     public CartItem(ProductDto product) {
@@ -26,6 +28,6 @@ public class CartItem {
 
     public void changeQuantity(int delta) {
         this.quantity += delta;
-        this.price = this.quantity * this.pricePerProduct;
+        this.price = this.pricePerProduct.multiply(BigDecimal.valueOf(this.quantity));
     }
 }

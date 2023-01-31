@@ -22,14 +22,20 @@
                 templateUrl: 'orders/orders.html',
                 controller: 'ordersController'
             })
+            .when('/statistics', {
+                templateUrl: 'statistics/statistics.html',
+                controller: 'statController'
+            })
+            .when('/registration', {
+                templateUrl: 'registration/registration.html',
+                controller: 'regController'
+            })
             .otherwise({
                 redirectTo: '/'
             });
     }
 
     function run($rootScope, $http, $localStorage) {
-
-
 
         if ($localStorage.springWebUser) {
             try {
@@ -57,7 +63,14 @@
     }
 })();
 
-angular.module('market-front', []).controller('indexController', function ($rootScope, $scope, $http, $location, $localStorage) {
+angular.module('market-front').controller('indexController', function ($rootScope, $scope, $http, $location, $localStorage) {
+
+    // todo одинаковый метод с store - разобраться как оставить один
+    $scope.addToCart = function (productId) {
+        $http.get('http://localhost:5555/cart/api/v1/cart/' + $localStorage.springWebGuestCartId + '/add/' + productId)
+            .then(function (response) {
+            });
+    };
 
     $scope.getTopProducts = function (period, quantity) {
         $http({
@@ -68,16 +81,16 @@ angular.module('market-front', []).controller('indexController', function ($root
                 quantity: quantity
             }
         }).then(function (response){
-            console.log(response);
-            console.log("response");
             $scope.topProducts = response.data;
         })
     };
-    $scope.getTopProducts(5, 10);
+    $scope.getTopProducts(5, 5);
 
     $scope.tryToAuth = function () {
+
         $http.post('http://localhost:5555/auth/auth', $scope.user)
             .then(function successCallback(response) {
+
                 if (response.data.token) {
                     $http.defaults.headers.common.Authorization = 'Bearer ' + response.data.token;
                     $localStorage.springWebUser = {username: $scope.user.username, token: response.data.token};
