@@ -10,6 +10,7 @@
         <module>front-service</module>
         <module>gateway-service</module>
         <module>auth-service</module>
+        <module>stat-service</module>
     </modules>
 
 	<groupId>com.geekbrains</groupId>
