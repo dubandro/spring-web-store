@@ -28,6 +28,9 @@
                     <a class="nav-link" href="#!/store">Каталог товаров</a>
                 </li>
                 <li class="nav-item">
+                    <a class="nav-link" href="#!/statistics">Статистика</a>
+                </li>
+                <li class="nav-item">
                     <a class="nav-link" href="#!/cart">Корзина</a>
                 </li>
                 <li class="nav-item" ng-show="isUserLoggedIn()">
@@ -49,6 +52,11 @@
                         </div>
                     </form>
                 </li>
+
+                <li class="nav-item" ng-show="!isUserLoggedIn()">
+                    <a class="nav-link" href="#!/registration">Регистрация</a>
+                </li>
+
                 <li class="nav-item" ng-show="isUserLoggedIn()" style="padding: 4px;">
                     <button class="btn btn-outline-secondary btn-sm" ng-click="tryToLogout()">Выйти</button>
                 </li>
@@ -63,29 +71,24 @@
     <script src="cart/cart.js"></script>
     <script src="orders/orders.js"></script>
     <script src="welcome/welcome.js"></script>
+    <script src="statistics/statistics.js"></script>
+    <script src="registration/registration.js"></script>
 
     <h3>
         Рекомендации
     </h3>
 
-    <table class="table table-hover">
-        <tr>
-            <td>Название товара</td>
-            <td>Стоимость</td>
-            <td>Категория</td>
-            <td>Всего продано</td>
-            <td>На общую сумму</td>
-        </tr>
-        <tbody>
-            <tr ng-repeat="item in topProducts">
-                <td>{{item.title}}</td>
-                <td>{{item.price}}</td>
-                <td>{{item.categoryTitle}}</td>
-                <td>{{item.qtyOfSales}}</td>
-                <td>{{item.sumOfSales}}</td>
-            </tr>
-        </tbody>
-    </table>
+    <ul class="list-group list-group-horizontal">
+        <li class="list-group-item" ng-repeat="item in topProducts">
+            <ul class="list-group list-group-flush">
+                <li class="list-group-item">{{item.title}}</li>
+                <li class="list-group-item">{{item.price}} solar</li>
+                <li class="list-group-item">
+                    <button class="btn btn-info" ng-click="addToCart(item.id)">В корзину</button>
+                </li>
+            </ul>
+        </li>
+    </ul>
 
 </div>
 

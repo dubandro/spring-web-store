@@ -1,7 +1,7 @@
 package com.geekbrains.spring.web.carts.services;
 
 import com.geekbrains.spring.web.api.dto.ProductDto;
-import com.geekbrains.spring.web.carts.dto.Cart;
+import com.geekbrains.spring.web.carts.model.Cart;
 import com.geekbrains.spring.web.carts.integrations.ProductServiceIntegration;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Value;
@@ -29,7 +29,7 @@ public class CartService {
     }
 
     public Cart getCurrentCart(String cartKey) {
-        if (!redisTemplate.hasKey(cartKey)) {
+        if (Boolean.FALSE.equals(redisTemplate.hasKey(cartKey))) {
             redisTemplate.opsForValue().set(cartKey, new Cart());
         }
         return (Cart) redisTemplate.opsForValue().get(cartKey);

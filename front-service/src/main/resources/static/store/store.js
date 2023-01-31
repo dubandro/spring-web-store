@@ -23,13 +23,13 @@ angular.module('market-front').controller('storeController', function ($scope, $
             arr.push(i);
         }
         return arr;
-    }
+    };
 
     $scope.addToCart = function (productId) {
         $http.get('http://localhost:5555/cart/api/v1/cart/' + $localStorage.springWebGuestCartId + '/add/' + productId)
             .then(function (response) {
             });
-    }
+    };
 
     $scope.loadProducts();
 });
