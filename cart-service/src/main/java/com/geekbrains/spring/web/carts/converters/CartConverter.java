@@ -1,7 +1,7 @@
 package com.geekbrains.spring.web.carts.converters;
 
 import com.geekbrains.spring.web.api.dto.CartDto;
-import com.geekbrains.spring.web.carts.dto.Cart;
+import com.geekbrains.spring.web.carts.model.Cart;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 
